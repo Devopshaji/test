@@ -1,0 +1,6 @@
+cd /var/lib/jenkins
+22.What is Private link ??
+                  --> connects between vpc and service hosted on aws  
+                AWS PrivateLink is a networking feature provided by Amazon Web Services (AWS) that
+				eases and secures connectivity between Amazon Virtual Private Clouds (VPCs), other 
+				Amazon cloud services and on-premises applications.
