@@ -1,0 +1,1258 @@
+AWS Class -1 
+-------------------------------------------------------------------------------------------
+
+==>What is Cloud Computing ??
+
+cloud computing is the delivery of computing services over the internet on a pay as you go basis.
+we can pay what where we used 
+------------------------------------------------------------------------------------------
+==> How cloud computing work??
+
+cloud computing has three service models:
+
+1.SAAS (Software as a service):  Software as a Service offers applications that are accessed over the web 
+and are not managed by your company, but by the software provider.  
+ 
+
+2.PAAS(Platform as a service ):It offers access to a cloud-based environment in which users can build
+ and deliver applications without the need of installing and working with IDEs
+
+3.IAAS(Infrastructure as a service) :Infrastructure as a service offers a standardized way of acquiring
+computing capabilities on demand and over the web. Such resources include storage facilities, networks,
+processing power, and virtual private servers.
+
+4.FAAS(Function as a Service): we are only use particular function for this models
+------------------------------------------------------------------------------------------------
+Different types of clouds ??
+
+there are 3 types of clouds
+1.Public cloud :it can be acess every where through the network ,
+                  ex: aws,azure,gcp
+2:Private Cloud:  it owns particular organization,
+
+3:Hybrid Cloud :is mixture of both private and public
+
+4.multi cloud: combition of all public cloud services.
+-------------------------------------------------------------------------------------------
+Aws : Strats from 2006 -- by amazon 
+Azure: Starts from 2010 -- by microsoft
+GCP: Starts from 2013 -- by google
+----------------------------------------------------------------------------------------
+AWS Service: is a cloud enterpise where we will host our resources.
+
+AWS Region: it is a geographical area where we cluster data centers 
+             in this region where physical servers are there
+-->	aws regions are independent of each other.creating instance in region they are confines only to that 
+region		 
+--------------------------------------------------------------------------------------
+Assaignment :How many AWS Regions in Mumbai ??
+There are two Regions :1.Mumbai
+                       2.Hyderabad (Recently Launched)
+------------------------------------------------------------------------------					   
+Avalability Zones: are with in the aws regions.they are isolated with each other to avoid fault
+             tolerence. az's are created
+--> are geographically separated regions where we have separate set of severs.az's are isolated with 
+ in region
+--------------------------------------------------------------------------------------------
+Edge Location: A site that cloud front uses to cache copies of your content for faster delivery 
+              to users at any location
+------------------------------------------------------------------------------------------------------			  
+Services: 
+
+IAM :is identity and access management,is used to manage users groups,roles and policies.it helps to
+         securely control acess to aws resources.
+-->IAM is global.it doesnot allow region change.
+------------------------------------------------------------------------------------------------------------
+How to create groups in IAM ??
+
+services-->IAM-->user Groups-->create group-->permissions add policyname
+-------------------------------------------------------------------------------------------------------
+How to create Users in IAM ??
+
+users-->add user-->user name-->add another user-->select acess type both of them-->next-->add user to
+ group-->next-->review-->create user
+-----------------------------------------------------------------------------------------------------
+Policy :   are set of permissions are restrictions applied on user   
+  -->    there are 3 types of policy
+           1.Identity Based policy
+           2.Resource Based Policy
+           3.Session Based Policy
+
+1.Identity Based policy : this policy is applicable on users,groups and roles 
+--> in identity policy under we have 3 another policy
+             1.aws managed policy : it is predefined by AWS
+			 
+			 2.custom managed policy : are created and managed policies by organization
+			 
+			 3.Inline policy: they are embaded directly into user,group (or) roles
+			 
+2.Resource Based Policy : are attached to aws resources like s3 bucket,ec2 instance			 
+
+3.Session Based Policy :we create temperory session for a role
+
+
+what should contain a policy --> will have
+               1. version
+               2.statement
+                    under statement -->we Have EAR components (Effect Action Resource)
+						in effect only 2 actions ->allow ,denay
+					    in action -> read write execute or *(simply all actions)
+                         resource-->applied for particular resorce or * (for all resources)
+									
+			   3.principal ->who is acessing  (it is optional)
+
+
+How to Create a Policy ??
+
+Policy->create policy->choose visual editor->service->action-->Resource (all)-->next tags-->name for
+ policy->description->create policy-->
+we can edit policy in json format
+-------------------------------------------------------------------------------------------------------
+Class -2 
+---------------------------------------------------------------------------------------------
+==>IAM Role :Is an identity that you create in your account.they are the secure way to grant the permissions
+ to entities
+--> Roles can be attached to users,groups,and services 
+--> generally roles come between services .role is nothing without policy attach
+--> we can attach multiple policies to a role.
+-->  for a service only a single role attached
+--> we are assuming a role in a cerain period of time
+
+==>Assume Role: it returns set of temperory security credentials that you can use to acess aws resource
+    which you might not normally have acess to the temperory credentials consists of acess key id,secret 
+		acess key,and security token
+
+==>ARN: amazon resource name ,its has unique numbers
+
+==>Profile Instance : its a profile that will be created when a role is attached to ec2 instance
+ 
+ ASSIAGNMENT :
+                login as user by using credentails try to switch role
+----------------------------------------------------------------------------------------------
+==>Assaignment : What is the difference between role and policy
+
+Role:IAM Roles are defined as a set of permissions that grant access to actions and resources in AWS
+
+Policy:Admins of the customer environment create an IAM Policy with a constrained set of access,
+and then assigns that policy to a new Role, specifically assigned to the provider’s Account ID and
+ External ID		
+-----------------------------------------------------------------------------------------------------------
+
+==> Cloud Watch: It is AWS Service. It monitor resource activities and metrics.it provides complete
+                   visiblity into your cloud resources and applications
+         --> it will have 4 steps
+                collect -->monitor-->Act-->Analise
+       collect : it will collects the metrics and logs
+       monitor: it visualize the applications
+       Act:   send notifications
+       Analize: what to do
+-----------------------------------------------------------------------------------------------------
+
+==> Cloud Watch Alaram : Cloud watch alaram features allows you to watch cloud watch metrics and to
+   receive notifications when metrics fall outside of the levels(high or low thresholds)that you configure
+
+ -> you can attach multiple alarams to each metric and each one can have multiple actions
+   
+  -> Alaram watches metrics and execute actions by publishing notifications to amazon SNS topics or by
+	 intiating Auto Scaling actions
+
+How to Create an alaram in AWS ??
+
+cloud watch-->All alarams-->State-->select metric for which resource-->ec2->17 pre instances->choose cpu
+utalization-->conditions greater than->next-->configure actions-->slect sns topic ->create new topic->
+topicname->end points->create topic->next-->alaram name->alaram description--> next-->create alaram
+
+==>SNS : is a simple notification service,where we send out emails/msgs ,we have topics and subcriptions
+
+-------------------------------------------------------------------------------------------------
+In alaram means where the threshold is not reach
+
+==>cloud watch Logs: enables to centralised logs of all aws resources
+
+==>cloud watch Metrics: metrics are the parameters or data which can be checked upon what kind of data 
+it is
+
+==>cloud watch Events: describe changes in Amazon Web Services (AWS) resources
+
+Assaignment: 
+             create alaram and configured the actions and see the utalization  
+---------------------------------------------------------------------------------------------------------
+
+Cloud Trail: will have all the details of the history,what we are using in the Aws.
+              These histoty will be available upto 90 days
+
+->Cloud trail is an AWS Service that helps you enable governance,compilance,operational
+        and risk aduting of your AWS Account.	
+->Events include actions taken in the AWS Managemnet Console,AWS Command Line Interface,and 
+      AWS SDK's and API's3
+  -> Cloud Trail Having events	  
+	 Management events:    Management operations performed on AWS 
+     Data events :    currently supported S3 and Lambda
+	Insights events:  AWS CloudTrail Insights helps AWS users identify and respond to unusual activity 
+	associated with write API calls by continuously analyzing CloudTrail management events.
+--------------------------------------------------------------------------------------------
+Class 3 
+---------------------------------------------------------------------------------
+VPC:vpc is a service that lets you launch aws services in a logically isoalted network.you can define
+ or you can have a complete control on ipaddress subnets root tables,internet gateways,natgateways
+ 
+==> subnets:group of ip address by default subnets are private
+ 
+==>public subnet:subnet that is associated with the root table that has a route or entry to internet
+                   gateway is called public subnet
+              ->   it is used for frontend servers
+ 
+==>private subnet:a subnet which does not have acess a root to internet.
+                    backend serevers like database
+ 
+==> internet gateway:is a network node that connects vpc to internet and other aws services
+ .
+==>natgateway:is used to enable instances in private subnet to connect to internet,that prevent internet
+                   from intialling connect with those instances.
+         NAT(Network Address Translation)
+ 
+==> Root table :contains entries that enable instances in subnet to communicate with other instances in
+                 vpc are directly with the internet
+                 -> we specify what are the traffics that allow
+ 
+==> CIDR -Classless inter domain Routing ,it is a method for allocating Range of Ipaddress
+
+==>IP address -Internet protocol that acts as a identifier of a particular device
+
+==>Elastic Ip Address :
+         An Elastic IP address is a reserved public IP address that you can assign to any EC2 instance in a
+          particular region
+==>Security groups:it is a firewall are attcahed at the instance,it is a statefull,Can add rules for “allow” only
+
+==>NACL ->Network Acess control list -> firewall against subnet it is optional,it a stateless,
+          Can add rules for both “allow” and “deny”
+   
+==>Bastion Host : A bastion host is a jumper server whose purpose is to provide access to a private network from an 
+                      external network 	
+------------------------------------------------------------------------------------------------
+==> VPC Quotas  (or) VPC Limits :
+                      •	5 VPC per region
+                      •	5 IGW per region
+                      •	200 Subnet per VPC 
+                      •	4 IPv4 CIDR blocks per VPC 
+                      • 5 Elastic IP addresses per Region 
+                      •	200 route tables per vpc 
+                      •	5 NAT gateways per Availability Zone 
+                      •	200 Network ACLs per VPC 
+                      •	200 Rules per network ACL 
+--------------------------------------------------------------------------------------------
+==> VPC PEERING :its a network connection between two vpcs that enable route traffic between them
+                     by using ipv4 address we can connect
+
+==> VPC PEERING CONDITIONS : it can be same region or different region it has 4 conditions
+
+condition 1 : the cdir block should not overlap.
+condition 2:transitive peering is not supported(it connects only one vpc to other vpc.we cannot connect more than one vpc)
+condition 3:if vpc's are in different region if we connect those vpc's charges will apply
+condition 4:only one vpc peering can exist between 2 vpc
+
+service -> vpc ->vpc settings ->name cidr block (different)->create vpc->peering connection->
+   create peering name,vpc->accepter vpc->create 
+-------------------------------------------------------------------------------------------------
+==> State Full :
+          Statefull means that any changes made in the inbound rule will be automatically reflected
+		  into out bound rules
+		  
+==> State less : 
+                Stateless means that any changes made in the inbound rule will not reflect in the 
+				outbound rule,i.e you need to add outbound rules seperately 
+-------------------------------------------------------------------------------------------------
+What is VPC End Points ??
+=> VPC EndPoints :	A VPC endpoint enables connections between a virtual private cloud (VPC) and supported
+                services, without requiring that you use an internet gateway, NAT device, VPN connection,
+				or AWS Direct Connect connection. Therefore, your VPC is not exposed to the public 
+				internet.
+----------------------------------------------------------------------------------------------------------
+What is VPN ??
+==>VPN: Virtual Private Network
+       Is mainly used to establish a secure and private tunnel from you network or device to aws network
+
+•	Aws site-to-site vpn: enables you to securely connect your on-premises network to your vpc.
+•	AWS client vpn : enables you to securely connect users to AWS or on premises network.
+
+----------------------------------------------------------------------------------------------------
+ What is Transist Gateway ??
+==>Transist GateWay: AWS Transit Gateway connects VPCs and on-premises networks through a central hub.
+                     This simplifies your network and puts an end to complex peering relationships. 
+					    It acts as a cloud router – each new connection is only made once.
+						
+  ->   A transit gateway enables you to attach VPCs and VPN connections in the same Region and 
+	   route traffic between them
+-----------------------------------------------------------------------------------------------------
+What is Direct Connect ??
+==>Direct Connect : AWS Direct Connect is a network service that provides an alternative to using the
+     Internet to utilize AWS cloud services. AWS Direct Connect enables customers to have low latency,
+	 secure and private connections to AWS for workloads which require higher speed or lower latency than
+ 	 the internet.
+
+----------------------------------------------------------------------------------------------------------
+==> We have 5 IP address are reserved or blocked 
+first 4 and last 1 ip address are reserved for different purpouse
+1  is resrved for network address
+2 is reserved aws for  vpc router
+3 is reserved aws for vpc DNS
+4 resrved for furthur use
+last one id reserved for network broadcast address
+--------------------------------------------------------------------------------------------------
+==> Difference between elastic ip address and Ip address
+  
+Elastic IP address :
+->It is assigned to your AWS account.	
+-> Elastic IP do not change and they remain same even if you terminate the instance and later again 
+    restart the same instance. 
+	
+IP Address :
+->It is assigned to your launched instance.	
+->when an instance is terminated the public IP attached to it gets released  and further when you relaunch
+ the same instance new IP address is assigned.	  
+--------------------------------------------------------------------------------------------------------
+Assaignment :
+ how to exclude few ipaddress in the security group ??
+  -->To allow or block specific IP address for your EC2 instances,use a network Acess control List or 
+  Security group rules in your VPC 
+
+----------------------------------------------------------------------------------------------------
+CLASS 5 
+---------------------------------------------------------------------------------------------------
+==> Ec2 Instance Types: 
+    There are 5 types of Instances
+	                 1.General Purpouse
+                     2.compute 
+					 3.memory
+					 4.Accelarated computing(faster)
+					 5.storage optimized
+					 
+-->1.General Purpouse:t2,m3m4m5
+                           t2 : burstable performance,used for many general purpouse
+                           m4 and m5 : small midsized databses,dataprocessing,enterpise applications
+                         
+-->2.compute : c4 and c5
+                   high performance web servers,science/engineering apps and serving
+
+-->3.memory :x1e,x1,r4
+              High performance database,in memory databse,large data processing engines        
+
+-->4.Accelarated computing(faster):p2,p3,g3,f1
+      p2 & p3 :Machine/Deep learning,high performance database,server size GUP compute workloads
+      g3 : 3D visualising and rending,application streaming,video encoding,server side graphic workloads
+      f1 : Genomics research,financial analytics,big data and security	   
+
+-->5.storage optimized :h1,i3,d2
+      D2/H1 :Map reduce,HDFS,network file system or data processing applications   
+      I3 :No SQL Databases.Data Warehouses,Elastic Search
+    
+-->6. high memory optimized- high ram , nitro system
+	
+---------------------------------------------------------------------------------------
+Purchasing of Instances: There are 4 Types
+                           1.on Demand
+						   2.reserved instance
+						   3.Spot Instnaces
+						   4.dedicate host
+
+-->1.on Demand:for every minute use ,you will charge
+                  in this you will choose instance at any time
+                  its more expensive
+                  most flexible
+                  your only charged when the instance is running
+
+-->2.reserved instance:to buy a instance at a set of time period
+                         -->by choosing this we can get discout
+                         -->you are the responisble for the price
+                         -->if you are not using you will definetly pay the entire amount
+ 
+-->3.Spot Instnaces: something were you bid on an instance type
+
+-->4.dedicate host:
+      A dedicated Physical machine you will have full control .it helps to save money on licence fee
+
+--------------------------------------------------------------------------------
+==>EBS(Elastic Block Store ) :has upto 16tB
+->its a kind of hard disk where we can store our data
+->ebs is external
+->if instance is terminated ,ebs secured so our data is secured in ebs 
+->if ebs can attach only one ebc,it cannot attach multiple instances
+->multipe ebs can attach one ec2 instance
+
+-------------------------------------------------------------------------------
+==>Elast Block Store Volumes (EBS) : There are 4 types
+                                 1.General Purpouse SSD
+								 2.Provisioned IOPS SSD
+								 3.ThroughPut Optimized HDD and Cold HDD
+								 4.EBS Magnetic(Previious Generation)
+
+1.General Purpouse SSD : used for dev/test environments and smaller DB Instances
+                           Volume size of 1GB to 16TB
+2.Provisioned IOPS SSD :used for mission critical applications that require sustained IOPS performace
+                         volume size of 4GB to 16TB
+3.ThroughPut Optimized HDD and Cold HDD :Cheaper than SSD Options also less performance
+                         volume size of 500 GB  to 16 TB
+4.EBS Magnetic(Previious Generation) : Low Storage  cost
+                                        volume size of min 1GB max 1 TB	
+   -> For instance we can attach upto 20 ebs volumes										
+------------------------------------------------------------------------------------------
+==> EFS (Elastic File System):
+    Amazon Elastic file system is a regional service storing data within and across multiple Availability
+	Zones (AZs) for high availability and durability
+	
+	Types of Elastic File Sysytem
+           1.EFS Standard Storage Class
+           2.EFS Standard Infrequent Acess Storage Class
+           3.EFS One Zone Standard
+           4.EFS One zone Infrequent Acess Storage Class
+
+1.EFS Standard Storage class : efs standard used for frequently accessed data ,require highest durability
+                                 and availability
+       
+2.2.EFS Standard Infrequent Acess Storage Class :
+       Efs Standard infrquent acess storage -less frequent acess data ,require highest durability and 
+	        availability
+3.EFS One Zone Standard :
+          Efs one zone standard is used for frequently acessed data,don't require highest durability and 
+		   availability
+	
+4.EFS One zone Infrequent Acess Storage Class :
+       EFS One zone Infrequent Acess Storage Class used for less frequent accessed data ,dont require
+           highest durability and availability	   
+------------------------------------------------------------------------------------------------------
+==> Difference Between EBS and EFS :
+      EBS                                             EFS
+	        
+ 1.Hardly Scalable                             1.Scalable
+ 2.Faster Than EFS ans S3                      2.Object Storage
+ 3.Block Storage                               3.Faster Than S3 slower than EBS
+ 4.Acessible only via the given Ec2 Machine    4.Acess via several Ec2 Machines and Aws Services
+ 5.Is Meant to be EC2 Drive                    5.Good for Sharable applications and WorkLoads
+ 6.File System Interface                       6.Web and File System Interface
+ 
+ 
+                         S3
+						 1.Scalable
+						 2.Object Storage
+						 3.Slower Than  EBS and EFS
+						 4.Can be Publically Acessible
+						 5.Good for Storing Backups
+						 6.Web Interface
+----------------------------------------------------------------------------------------------------------	
+==>Snapshot:
+    -> You can back up the data on your Amazon EBS volumes to Amazon S3 by taking point-in-time snapshots.
+	Snapshots are incremental backups 
+	
+-----------------------------------------------------------------------------------------------------	
+==>AMI (Amazon Machine Image): 
+
+   -->An AMI is a template that contains the software configuration (operating system, application server,
+   and applications) required to launch your instance. 
+  -->You can launch multiple instances from a single AMI when you need multiple instances with the same
+  configuration.
+  
+----------------------------------------------------------------------------------------------------
+==>Difference between Sanpshot and AMI :
+
+ ->An EBS snapshot is a backup of a single EBS volume. The EBS snapshot contains all the data stored on 
+  the EBS volume at the time the EBS snapshot was created.
+  
+ ->An AMI image is a backup of an entire EC2 instance. Associated with an AMI image is EBS snapshots.
+  Those EBS snapshots are the backups of the individual EBS volumes attached to the EC2 instance at the
+  time the AMI image was created.
+
+1.Snapshort are asscoiated with ebs , while AMI are associated with ec2 instances
+2.snapshot are backup of the data on EBS volumes,, where as AMI are bootable copy of the whole instance
+3AMI are used to store the current instance configuration  
+4.Taking snapshots of non EBS backed instances are not possible but AMI of a non EBS backed instances can
+ be created
+ -----------------------------------------------------------------------------------------
+==> Data life cycle Manager:
+	                You can use Amazon Data Lifecycle Manager to automate the creation, retention, and 
+					deletion of snapshots taken to back up your Amazon EBS volumes
+
+---------------------------------------------------------------------------------------------------------
+CLASS 6  
+------------------------------------------------------------------------------------------------
+ == >Creation of Block Volumes 
+
+•	Launch two ec2 instance in different az’s(instance1 & instance2)
+•	Create EBS volume and attach it to instance1
+•	The volumes are attached to instance1 you can verify it by logging into instance1 and executing “lsblk” command, but it’s not mounted you can verify it through by running command “df -TH”
+•	Mount the volume to instance1
+•	Format the disk with ext4: “mkfs -t ext4 /dev/xvdf”
+•	Create a directory in root:   1. “cd /”     2. “mkdir /mnt/mydisk”
+•	Mount the disk: “mount /dev/xvdf /mnt/mydisk”
+•	you can verify that disk is mounted by running “df -TH” command.
+•	Create some files 
+•	Take a snapshot 
+•	Unmount the disk 
+  -->	umount /mnt/mydisk
+  -->	Detach the volume from ec2 instance.
+  -->	delete the volume
+•	Create a new volume from snapshot 
+•	Attach the volume to newly created instance2.
+•	Mount the volume to instance2
+   -->	Create a directory in root:   1. cd /     2. mkdir /mnt/mydisk
+•	mount /dev/xvdf /mnt/mydisk
+
+Assaignment : Create SnapShot in the Block Volumes
+
+----------------------------------------------------------------------------------------------------
+Class 7 
+---------------------------------------------------------------------
+==>Load Balancer : Distribution of load across instances
+             A load balancer distributes incoming application traffic across multiple EC2 instances
+  			 in multiple Availability Zones
+
+There are 4 types of Load Balancer
+            1.Classic Load Balaner 
+            2.Application Load Balancer
+			3.Network Load Balancer
+			4.Gateway Load Balancer
+		
+1.Classic Load Balancer :•	Used for applications that were built in existing EC2 classic env.
+                           ->it works at connection & Request level 
+                    ->Irrespective of the path it will navigate the traffic any of the service
+		            ->mainly used for all of the http,https,Tcp and udp
+
+2.Application Load Balancer :  Used mainly for web application running http and https protocols.
+                          ->works at request level
+				 when we specify the path it will redirect to where that particular micro
+                           service is there
+                -> mainly used for web applications, run on http,https protocols
+
+3.Network Load Balancer : used when we need high performace with low latency
+                      ->works at connection level
+					  ->mainly used for web applications, run on TCP,UDP protocols
+					  
+4.Gateway Load Balancer : This one is recently created in 2020
+                     -> we are not using this load balancer in our organization					  
+                     ->security and policy controls
+              		 ->	when we want to deploy and manage of third party applications
+					 
+==> Layers in Load Balancer : layer 7 and layer 4
+                layer 7 traffic (http and https) are used in classic and application load balancer
+                 layer 4 traffic(tcp,udp) are used in network load balancer					 
+
+==> Types of Layers in Load Balancer:
+ 1.Application Layer           --> Network Process to Application                      --> Layer 7
+ 2.Presentation Layer          --> Data Representation                                 --> Layer 6
+ 3.Session Layer               --> Interhost Communication                             --> Layer 5
+ 4.Transport Layer             --> End-to-End connections and reliability              --> Layer 4
+ 5.Network Layer               -->Path Determination and IP                            --> Layer 3
+ 6.Data Link Layer             --> MAC and LLC(physical addressing)                    --> Layer 2
+ 7.Physical Layer              -->Media signal and binary transmission                 --> Layer 1
+
+==>Load Balancer Creation :
+  step 1: Create VPC
+  step 2 :Create Internet Gateway attach to VPC
+  step 3:Create Two Public Subnets in different AZ's
+  Step 4:Create Route Table for subnets,do subnet association and give routes
+  step 5:create two Ec2 Instances in different AZ's
+  step 6:in security configuration give user data for response from server
+  step 7:create Load balancer
+  
+Load balancer->create loadbalancer->classic load-> balancer name->creatr lb inside->
+listener configuration->select subnets->assaign security groups->select security groups->
+configure health check->add instances->next ->next->create
+
+==>Load LB Inside :load balancer request from which port ,which port should be opened
+
+==>Healthy threshold : consicutively we have yes response consider healthy
+
+==>UnHealthy threshold : consicutively we have no response consider unhealthy
+-------------------------------------------------------------------------------------------------
+==>Auto Scaling :Take care of spinning up instances similar to earlier instances.whith out human
+                   intervention
+ 
+   AWS Auto Scaling monitors your applications and automatically adjusts capacity to maintain steady,
+   predictable performance at the lowest possible cost.
+                            ==>Scaling: there are two types
+                                 1. Horizontal Scaling 
+		                           2.Vertical Scaling
+		 
+-> Horizontal scaling:it has the same cofiguratios.act of changing the number of nodes without changing 
+                              the size of the any induvidual node
+
+-> vertical scaling:it will increase the server capacity by attaching memory to the server itself when
+                                the load is high size of the same node,computing power
+
+-----------------------------------------------------------------------------------------------------
+Class 8 
+---------------------------------------------------------------------------------------------------------
+
+==> Internal Load Balancer:it confined to vpc.we cannot acess through internet.we cannot acess in 
+                             public subnet when we have private subnet we can acess internal load balancer.
+
+Target Groups :
+               ->  We can create target groups in order to route to traffic to the respective paths 
+-------------------------------------------------------------------------------------------------------
+How to Create Template ??
+
+Autoscaling->Auto scaling group->create auto scaling groop->choose launch template or configuration->
+Name(Autoscaling group)->create a launch template->template name->template version->AMI->instance type->
+keypair->security groups->create launch template
+
+
+How to Create Auto Scaling ??
+
+Auto scaling group->choose template->next->choose instance launch option->vpc->subnets->load balancing->
+attach to existing load balancer->choose from classic load balancer->classic load balancer->health check->
+health check grace period->next->group size ->Scaling policy->Target scaling policy->scaling policy name->
+metric type->target value->Notification->next->tags->next->autoscaling group
+
+----------------------------------------------------------------------------------------------------------
+3.What are AutoScaling Groups ??
+      An Auto Scaling group contains a collection of Amazon EC2 instances that are treated as a logical
+	  grouping for the purposes of automatic scaling and management. An Auto Scaling group also enables
+	  you to use Amazon EC2 Auto Scaling features such as health check replacements and scaling policies.
+-----------------------------------------------------------------------------------------------------------
+4.What is Desired capacity in AutoScaling ??
+       Desired capacity or size is the ideal number of instances in that auto scaling group. If there 
+		 is a difference between those two numbers, the auto scaling group can either instantiate 
+		 (provision and attach) new instances or remove (detach and terminate) instances.
+-----------------------------------------------------------------------------------------------------------------
+
+==>Basic Monitoring:Cloud watch metrics monitoring every 5 minutes
+
+==>Detail Monitoring:cloud watch metrics monitory every minute
+
+==>Encryption:For masking the data   we need encryption.
+       for data security.it converts data into binary format.we can decreptrd data by using 
+                                 encrypted keypair-
+       we have 2 types of encryption
+      1.Server side encryption
+      2.Client side encryption
+
+-->1.server side : managed by aws
+
+-->2.client side encryption : managed by customer or user ,customer or user provide key for decrypted the
+                          data
+                      
+==>KMS-Key management service: that makes it easy for to create and manage keys and controls the use of
+                                 encryptioin across a wide range of AWS services.
+               There are 2 types of keys
+			   1.AWS managed keys
+			   2.Custom managed keys
+			   
+-->AWS managed keys : Aws will have control ,these are for server side encryption
+
+-->custom managed keys : User can have control.these are for client side encryption.
+
+--------------------------------------------------------------------------------------------------------
+Class 9 
+----------------------------------------------------------------
+==> AWS Route53 :
+                 Amazon Route53 is a highly available and scalable Domain Name System(DNS) webservice. 
+              -> we can point IP address to domain name or point host name to another host name.
+			  
+
+==> Types of Routing Policy :
+                         1.Simple RoutingPolicy
+						 2.Failover RoutingPolicy
+						 3.Geolocation RoutingPolicy
+						 5.Latency Based RoutingPolicy
+						 7.Weighted RoutingPolicy
+
+1.Simple RoutingPolicy :
+    ->Simple Routing allows to configure DNS with no special Route53 Routing
+    ->it routes traffic to a single resource
+             EX :	web server to a website
+	->with simple routing,multiple records with same name cannot be created but mutiple values can be 
+	   specified  in the same record		 
+
+2.Failover RoutingPolicy :
+    ->Failover Routing routes traffic to a resource when the resource is healthy or to a different 
+	   resource when the previous resource is unhealthy
+    ->The records can route traffic to anything from an Amazon S3 Bucket as a website to a complex 
+      tree record   
+
+3.Geolocation RoutingPolicy :
+    ->Geolocation Routing route the resources that based on the geographic location of the user
+    ->It localizes the content and present part or the entire website in the language of the user
+	->Geographic locations are specified by continent,by country,or by state in the united states
+	 		
+
+5.Latency Based RoutingPolicy : 
+    ->If a website has to be installed or hosted across multiple AWS regions then Latency RoutingPolicy 
+	   is used
+   -> Use when you have resources in multiple AWS Regions, and you want to route traffic to the region
+         that provides the best latency
+
+
+7.Weighted RoutingPolicy : 
+       -> Use to route traffic to multiple resources in proportions that you specify
+    ->Weighted Routing routes multiple resources with a single domain name or subdomain name and control 
+	   the traffic is routed to each resource
+
+==> Supported DNS Record types in Amazon Route53 :
+                           1.A record type
+						   2.Cname record type
+						   3.AAAA record type
+						   4.Alias record type
+						   
+1.A record type	: Maps IP address to domain name ex: 10.180.0.0 to myapp.mydomain.com					   
+2.Cname record type : Maps hostname to another host name: us-east.2.elb.amazonaws.com to
+                        myapp.mydomain.com
+3.Alias record type : points a host name to AWS Resource ex: myapp.mydomain.com 
+                        to us-east.2.elb.amazonaws.com
+4.AAAA record type : Maps IP address to domain name,using an IPV6
+                       address in colon-separated hexadecimal notation
+5.CAA record type :  A CAA record specifies which certificate authorities (CAs) are allowed to issue
+                      certificates for a domain or subdomain.
+6.DS record type  : A delegation signer (DS) record refers a zone key for a delegated subdomain zone
+7.MX record type  : An MX record specifies the names of your mail servers and, if you have two or more
+                    mail servers, the priority order. Each value for an MX record contains two values,
+					priority and domain name.
+8.NAPTR record type : A Name Authority Pointer (NAPTR) is a type of record that is used by Dynamic 
+                    Delegation Discovery System (DDDS) applications to convert one value to another or to
+					replace one value with another
+9.SOA record type : A start of authority (SOA) record provides information about a domain and the
+                      corresponding Amazon Route 53 hosted zone	
+10.PTR record type : A PTR record maps an IP address to the corresponding domain name.					  
+
+==>Hosted Zone :some thing like container it contains routing information for your domain
+
+--------------------------------------------------------------------------------------------------------
+==> AWS Secrets :AWS Secrets Manager helps you protect secrets needed to access your applications,
+              services, and IT resources. The service enables you to easily rotate, manage, and retrieve 
+	          database credentials, API keys, and other secrets throughout their lifecycle.
+
+-----------------------------------------------------------------------
+Assaignment : What is difference between SNS and SES
+
+SES : 1.Remember that SES is for e-mail only
+      2.It can be used for incoming and outgoing email
+	  3.It is not subscription-based, you only need to know the e-mail address 
+
+SNS : 1.SNS supports multiple formats (SMS, SQS, HTTP, email)
+      2.Push notifications only
+	  3.Pub/sub model. Consumers must subscribe to a topic
+	  4.You can fan-out messages to large number of recipients (e.g. multiple clients each with their
+          	  own SQS queue).
+			  
+SQS : Simple Queu service			  
+--------------------------------------------------------------------------------------------------			  
+Class 10 
+------------------------------------------------------------------
+AMAZON S3 
+
+==>What is S3 ??
+  Amazon S3 has a simple web services interface that you can use to store and retrieve any amount of data,
+  at any time, from anywhere on the web.
+
+   -> In s3 each item consider as a s3 bucket
+   ->in s3 we can upload data in the form od object
+ 
+==>Types of Uploads :
+  we have 2 types of uploads in s3
+                      1.Single operation upload
+					  2.Upload object in parts
+
+1.Single operation upload:
+      ->	It’s a traditional upload where you will upload the object in one part
+      ->	A single operation upload can upload the file up to 5GB in size.
+2.Upload object in parts (Multi upload operation) :
+      ->	Using multipart upload, you can upload the large objects up to 5TB.
+      ->	You can use multipart upload for the objects from 5MB to 5TB in size.
+  
+==> Rules for bucket naming:
+	     -> Bucket names must be between 3 and 63 characters long.
+	     -> Bucket names can consist only of lowercase letters, numbers, dots . and hyphens -.
+	     -> Bucket names must begin and end with a letter or number.
+	     -> Bucket names must not be formatted as an IP address (for example, 192.168.5.4).
+	     -> Bucket names can't begin with xn-- (for buckets created after February 2020).
+         ->bucket name should not be copied.it will be unique across the globe(aws)
+==> Limitation of S3 bucket:
+	     -> Only 100 buckets can be created per account.
+	     -> Can hold unlimited objects
+
+==> S3 Storage classes:
+              1.Standard
+			  2.Reduced Redundancy storage
+			  3.Infrequent access
+			  4.Glacier
+              5.S3 Archive
+			  6.S3 One Zone
+			  7.S3 Outposts
+1.Standard :
+	     ->Designed for general- and all-purpose storage 
+	     ->Default storage option
+	     ->99.999999999% object durability
+	     ->99.99% object availability 
+	     ->Most expensive storage class. 
+2.Reduced Redundancy storage : 
+	     -> Designed for non-critical objects 
+	     ->99.99% object durability 
+	     ->99.99% object availability
+	     ->Less expensive than standard
+3.Infrequent access :
+	      ->Designed for less frequently accessed objects.
+	      ->99.999999999% object durability
+	      ->99.99% object availability
+          ->Less expensive than reduced redundancy storage
+4.Glacier :
+	       ->Designed for long term archival storage 
+	       ->May take several hours to retrieve the objects from this storage 
+	       ->Cheapest s3 storage class
+5.S3 Archive :
+            -> storing files for long term
+6.S3 Outposts :
+             ->delivers object storage on premises from aws s3 
+7.S3 One Zone :
+              ->stores in single aws availability zones
+			
+==>s3 intelligent tiering :move the data from one storage class to another storage class depending 
+                        on accessing the data							 
+                             for data with unknown and  changing acess pattern
+==> S3 Life cycle policy :
+               An object lifecycle policy is a set of rules that automate the migration of the object
+ 			   storage class to different storage class
+
+          --> By default, lifecycle policies are disabled for a bucket 
+
+==>S3 Bucket Policy : A bucket policy is a resource-based AWS Identity and Access Management (IAM) policy.
+      You add a bucket policy to a bucket to grant other AWS accounts or IAM users access permissions 
+      for the bucket and the objects in it. Object permissions apply only to the objects that the bucket
+       owner creates. For more information about bucket policies, see Overview of managing access.
+	        ->  Bucket policies are limited to 20 KB in size.	
+  
+==>ACl(Acess Control List) : Amazon S3 access control lists (ACLs) enable you to manage access to 
+             buckets and objects.Each bucket and object has an ACL attached to it as a subresource. 
+			 It defines which AWS accounts or groups are granted access and the type of access.
+                ->An ACL can have up to 100 grants.
+				
+==>Generator Policy : The AWS Policy Generator is a tool that enables you to create policies that
+                       control access to Amazon Web Services (AWS) products and resources.
+ in this by adding policy type and add statemnets and EAR componets we can generate a policy
+ 
+ --------------------------------------------------------------------------------------------------------
+What is version of s3 bucket ??					
+					every time you upload or change in the bucket you will have version created to keep 
+					tracking of changes.versions enables bucket can help you recover objects from
+					accidental deletion		
+----------------------------------------------------------------------------------------------------------
+What is S3 transfer Accelaration ?
+     Amazon S3 Transfer Acceleration is a bucket-level feature that enables fast, easy, and secure transfers of 
+	 files over long distances between your client and an S3 bucket. Transfer Acceleration takes advantage of the
+	 globally distributed edge locations in Amazon CloudFront.
+
+-----------------------------------------------------------------------------------------------
+Class 11 
+---------------------------------------------------------------------------------------------
+==> Lamda :
+  -> Lamda is a server less compute.Lamda lets you run the code without managing servers 
+  -> you pay only for the compute time you consume
+  ->Just upload your code and Lambda takes care of everything required to run and scale your code with
+      high availability
+	  
+	•	Manage your virtual functions not really caring about the servers 
+    •	Run on demand 
+    •	Scaling is automated 
+ 
+==> Billing :
+              Pay per request first one million requests is free $0.20 per one million request.
+              compute time 0.00001667 for every GB-seconds used.
+ 
+==> AWS Lambda Languages :
+                            NodeJS, Python, Python3, Gr00vy, java, csharp, Scala and GO
+
+==> AWS Lambda Integration :
+                             Kinesis, API Gateway, DynamoDB, AWS S3, CloudWatch Events, CloudWatch logs, 
+							 SNS and Incognito 
+ --> max code execute run time is 5 mins
+
+==> Fargate:   is help to spinnup the instance,provide the infrastructure for the lamda
+  
+  AWS Fargate is a service that enables a user to run containers on Amazon's cloud computing platform 
+  without the need to manage the underlying infrastructure.				
+-----------------------------------------------------------------------------
+==> What are Lamda Versions,layers and aliases
+
+==> Lamda Aliases : A lamda Alias is like a pointer to specify function version.User can access the 
+                      function version using the alias Amazon Resource Name (ARN).
+					  
+==> Lamda Versions : You can use versions to manage the deployment of your functions.
+      For example, you can publish a new version of a function for beta testing without affecting users
+	  of the stable production version. Lambda creates a new version of your function each time that you
+	  publish the function. The new version is a copy of the unpublished version of the function.
+
+==> Lamda Layers :	A Lamda Layer is an archive containing additional code,such as libraries,dependencies
+                or even custom runtimes.when you include a layer in a function,the contents are extracted
+                to the /opt directory in the execution environment.				
+					  
+--------------------------------------------------------------------------------------------------------					  
+	EX: when you push upload any image to the s3 bucket.lamda triggers so to make the image size smaller so that can be
+   viewed in mobiles	
+-------------------------------------------------------------------------------------------------------------- 
+==> Relational Database Service (RDS) :
+            Amazon Relational Database Service (Amazon RDS) makes it easy to set up, operate, and scale
+			a relational database in the cloud.
+
+Which relational database engines does Amazon RDS support?
+ Amazon RDS database engines:
+                                  •	Amazon Aurora
+                                  •	PostgreSQL
+                                  •	MySQL
+                                  •	MariaDB
+                                  •	Oracle 
+                                  •	Microsoft SQL Server
+
+Encryption in RDS:
+                     Encryption at rest is supported for 
+                        •	Amazon Aurora
+                        •	PostgreSQL
+                        •	MySQL
+                        •	MariaDB
+                        •	Oracle 
+                        •	Microsoft SQL Server
+
+Q: Can we enable encryption on exciting DB :
+                      Encrypting existing DBs is not supported. To do this, you’ll need to create a new 
+                     encrypted instance and migrate data to it. The encryption key can be stored in KMS.
+
+Q: Which is the non-relational database supported in AWS :
+                                             Amazon DynamoDB is the NoSQL database supported by AWS 
+	
+difference bw non relational and relational
+
+ -> in non relational the files are not in the structure,it will not follow no sql db ,it is not sequence 
+     followed
+
+ -> relational files are in structured format,it will followed sql db, it is sequence followed
+---------------------------------------------------------------------------------------------
+What is difference between AWS RDS and AWS Red Shift ??
+  --> Both Amzon Redshift and RDS enable you to run traditional relational databases in the cloud while 
+       offloading database administration
+ Aws Rds : Customer use Amazon Rds database primarily for online-transaction processing (OLTP) workload
+Aws Red Shift : Redshift is used primarily for reporting and analytics 
+
+--------------------------------------------------------------------------------------------------
+AWS CLI VERSION -->2.3.4
+----------------------------------------------------------------------------------------
+SQS :
+      Amazon Simple Queue Service (SQS) is a managed message queuing service technical professionals
+	  and developers use to send, store and retrieve multiple messages of various sizes asynchronously.
+
+     The service enables users to decouple individual microservices, distributed systems and serverless
+	 applications from one another and to scale them without requiring the user to establish and maintain
+	 their own message queues.
+
+==>There are two types of Amazon SQS queues: first-in-first-out (FIFO) and standard queues.
+
+--> FIFO :In FIFO queues, message strings remain in the same order in which the original messages were 
+          sent and received. FIFO queues support up to 300 send, receive or delete messages per second
+         FIFO queues are designed for messaging between applications where the order of operations and 
+		 events is critical.
+
+--> Standard queues : Standard queues attempt to keep message strings in the same order in which the
+            messages were originally sent, but processing requirements may change the original order
+			or sequence of messages. For example, standard queues can be used to batch messages for
+			future processing or allocate tasks to multiple worker nodes.
+
+-------------------------------------------------------------------------------------------------
+Difference between SNS and SQS :
+                    Key Differences
+==> Entity Type :
+                    SQS : Queue (similar to JMS, MSMQ).
+                    SNS : Topic-Subscriber (Pub/Sub system).
+==> Message consumption :
+                       SQS : Pull Mechanism — Consumers poll messages from SQS.
+                       SNS : Push Mechanism — SNS pushes messages to consumers.
+==> Persistence :
+                 SQS : Messages are persisted for some duration is no consumer available. The retention
+				 period value is from 1 minute to 14 days. The default is 4 days.
+                 SNS : No persistence. Whichever consumer is present at the time of message arrival, 
+				 get the message and the message is deleted. If no consumers available then the message 
+				 is lost.
+==> In SQS the message delivery is guaranteed but in SNS it is not.
+==> Consumer Type :
+                   SQS : All the consumers are supposed to be identical and hence process the messages
+					in exact same way.
+                   SNS : All the consumers are (supposed to be) processing the messages in different ways.
+==> Use Cases :
+  Choose SNS if:
+                  You would like to be able to publish and consume batches of messages.
+                  You would like to allow same message to be processed in multiple ways.
+                  Multiple subscribers are needed.
+Choose SQS if:
+                You need a simple queue with no particular additional requirements.
+                Decoupling two applications and allowing parallel asynchronous processing.
+                Only one subscriber is needed.
+
+--------------------------------------------------------------------------------------------------------
+Class 12  
+-----------------------------------------------------------------------------------------------------
+==>AWS Elastic Bean Stalk :With Elastic Beanstalk, you can quickly deploy and manage applications in the
+              AWS Cloud without having to learn about the infrastructure that runs those applications.
+			  Elastic Beanstalk reduces management complexity without restricting choice or control.
+			  You simply upload your application, and Elastic Beanstalk automatically handles the details
+			  of capacity provisioning, load balancing, scaling, and application health monitoring.
+
+--> Elastic Beanstalk supports applications developed in Go, Java, .NET, Node.js, PHP, Python, and Ruby
+
+ Features :
+  ->elstic bean is the fastest and simplest way to deploy your applications on aws
+  ->enables you to focus on writing code rather than spending time managing and configuring servers etc
+  ->Automatically scales your application up and down based on applications specific needs
+  ->gives freedom to select the aws resources like ec2 instance type,that are optimal for your application
+		
+------------------------------------------------------------------------------------------------------
+==> Difference between Lamda and Elastic Bean Stalk
+
+-->AWS Elastic Beanstalk : Directly takes care of the details for deployment in terms of auto-scaling,
+                          app health monitoring, capacity provisioning, and load balancing
+Advantages:    1.Can integrate with different services
+               2.Easily deploys               
+               3.Quick
+
+-->AWS Lambda : Runs code for events and directly manages the infrastructure for compute resources. 
+                Extends various services with custom logic, and creates back-end services.
+Advantages:    1. Requires no infrastructure management
+               2.Low costing
+               3.Swift
+----------------------------------------------------------------------------------------
+
+==>COGNITO :
+             -> It Mainly provides authentication authorization and user management for your application 
+             -> It provides a managed user pool to mange identity for the application 
+
+--> Cognito provides user flows: 
+                     •	Signup
+                     •	Signin
+                     •	Forgot or change password
+                     •	Multifactor authenticatio
+					 •	Email and phone verification 
+
+--> It also provides software development kit to your mobile or web application, and also provide lambda 
+       triggers in order to customize any of these user flows with you own business logic 
+
+--> It also provides a built-in hosted UI for these user flows 
+
+                          Social identity can be integrated 
+                           Facebook
+                           Google
+                           Amazon 
+                           SAML
+ 
+ ==> User Pool: 
+ • User pools acts as mediator between your app and external social identity providers 
+ • you can add multiple identity providers as you need.
+ • The user pool manages the token exchange with each of the  providers and gives your app standard 
+     user pool tokens of same format
+
+==> Identity Pool :
+•	Where you exchange the authentication token to get temporary aws credentials which you can use
+    to access the resources directly from the app
+•	These can be used independently of each other or used together   
+
+==> AWS Cognito User Pools : is there to authenticate users for your applications
+==> AWS Cognito Identity pool: This is a service which was designed to authorize your users to use the 
+                                 various AWS services 
+								 
+==> So, the difference is :
+                            •	AWS Cognito User Pools: Granting access to a application
+                            •	AWS Cognito Identity Pools: Granting access to amazon service 
+								 
+ ----------------------------------------------------------------------------------------
+ ==> Difference between IAM and Cognito 
+ 
+ 
+ AWS IAM gives securely and control access to AWS services and resources for your users
+ AWS Cognito It Mainly provides authentication authorization and user management for your application 
+
+-------------------------------------------------------------------------------------------------
+What is Cloud Formation ??
+
+     AWS CloudFormation is a service that gives developers and businesses an easy way to create a 
+	 collection of related AWS and third-party resources, and provision and manage them in an orderly 
+	 and predictable fashion.
+
+ cloud formation is used only for AWS and IAC tool for all aws services.
+
+
+   But Terraform only have acess to important and it can provision for other cloud providers like gcp,
+   azure..
+
+----------------------------------------------------------------------------------------------------------------
+==> AWS Code Commit :is a secure higly scalable,managed source control service which hosts private git 
+                       repositories
+ 
+git hub : hosts both public and private repos
+
+
+codecommit --> create group --> add policy(awscodecommitfullacess policy)(awscodecommitpoweruser)->add users->
+give policy(awscodecommit fullacess,admin users,awscodecommit poweruse,awscodecommitreadonly)->add user to group
+->go to user->security credentials-->hhtps credentials-generate new credentials->signout 
+signin as iam user->goto codecommit->create a repository->
+--------------------------------------------------------------------------------------------------------
+==> What is Cloud Front :
+                    AWS CloudFront is a globally-distributed network offered by Amazon Web Services,
+	which securely transfers content such as software, SDKs, videos, etc., to the clients, with high
+	transfer speed.
+
+------------------------------------------------------------------------------------------------------
+==> what is NAT Instance ??
+
+   -->An Instance that will allow only outgoing traffic but not incoming traffic
+    --> They are simply ec2 instances with specially configured rounting tables
+
+--------------------------------------------------------------------------------------------------------
+What is AWS SnowBall ??
+           A Snow ball is a petabyte-scale data transport solution.That uses secure appliances
+		   to transfer large amount of data into and out of the aws cloud
+
+--------------------------------------------------------------------------------------------------------
+What is AWS Elastci Search ??
+               Elasticsearch is a distributed search and analytics engine built on Apache Lucene.
+	          Elasticsearch has quickly become the most popular search engine and is commonly used for 
+			  log analytics, full-text search, security intelligence, business analytics, and operational
+			  intelligence use cases.
+           Elastic search will help you search contents in aws
+--------------------------------------------------------------------------------------------------------
+==> What is Log Stash :
+                Logstash is a light-weight, open-source, server-side data processing pipeline that allows
+				you to collect data from a variety of sources, transform it on the fly, and send it to
+				your desired destination. It is most often used as a data pipeline for Elasticsearch, 
+				an open-source analytics and search engine
+
+-----------------------------------------------------------------------------------------------------------
+
+What is Swap memory ??
+        A swap memory is a space in the hard disk of your computer that operationg systems will use to
+		put the information that is acutally in the ram to free it for another application
+-------------------------------------------------------------------------------------------------------------
+What is Elastic Cache ??
+             AWS Elasticcache is web service that makes it easy to deploy, operate and scale an
+			 in-memory cache in the cloud.
+
+--------------------------------------------------------------------------------------------------------	
+ What is REST API ??
+                 To fecth the data from any database rest api used.it will get the format in json formart
+				 rest stands for representational state transfer
+ ------------------------------------------------------------------------------------------- 
+What is Resolve Config ??
+            All DNS up addresses and names are saved in resolve.config files 
+----------------------------------------------------------------------------------------------
+1.What is AWS Resource Acess Manager ?
+    It is a service provided by AWS which will give you acess resource from one AWS account to another
+	AWS Account.
+--------------------------------------------------------------------------------------------------
+2.What is Local Zone ??
+      Local Zones are type of infrastructure deployment that places compute,storage,database,and other
+	  select aws services close to large population and industry centers 
+--------------------------------------------------------------------------------------------------
+6.What is Sticky bit ??
+      A Sticky bit is a permission bit that is set on a file or a directory that lets only the owner of
+	  the file/directory or the root user to delete or rename the file. No other user is given privileges
+	  to delete the file created by some other user.
+
+--------------------------------------------------------------------------------------------
+11.What are S3 Lifecycle Timings ??
+
+12.Load Balancer Setup ??
+
+16.Use Cases of Weighted routing policy ??
+------------------------------------------------------------------------------------------------------
+13.How do  you block IP address by using NACL ??
+      In NACL Inbound Rules you need to give deny to block ip address
+------------------------------------------------------------------------------------------------------------
+
+18.Where does startup.sh will be while installing tomcat??
+     Tomcat-bin-startup.sh
+------------------------------------------------------------------------------------------------
+19.How to install Tomcat ??
+----------------------------------------------------------------------------------------------------------
+21.How to Create Security Groups ??
+--------------------------------------------------------------------------------------------------------
+22.What is Private link ??
+                  --> connects between vpc and service hosted on aws  
+                AWS PrivateLink is a networking feature provided by Amazon Web Services (AWS) that
+				eases and secures connectivity between Amazon Virtual Private Clouds (VPCs), other 
+				Amazon cloud services and on-premises applications.					
+------------------------------------------------------------------------------------------------------
+23.What is Security token service ?? 					
+			Enables you to request temporary limited previlage credentials for AWS identity and IAM 			
+---------------------------------------------------------------------------------------------------------			
+24.How many ways we can access Aws ??
+  by using AWS management console and aws cli
+ ----------------------------------------------------------------------------------------------
+25.what is on premises infrastructure ??
+  On-premises means a software & a hardware infrastructural setup deployed & running from within the confines of 
+  your organization. You have the complete control over the infrastructural setup. ... We can also call
+  on-premises infrastructure as a private cloud.
+  This is the most cost effective and need more space
+ ------------------------------------------------------------------------------------------------------------------- 
+ 14.Status Check in EC2 Instance ??
+     These status checks are the results of automated tests performed by EC2 on every running instance
+	 that detect hardware and software issues. Whether you are running applications on AWS or elsewhere,
+	 diagnosing problems quickly and accurately can be difficult
+ 
+---------------------------------------------------------------------------------------------------------------
+1. What are the types of volumes of EC2 instances ?
+   there are 2 types 
+   1. EBS Volumes
+   2.Instance Store Volumes
+------------------------------------------------------------------------------
+2. What is Launch Configuration ?
+     A launch configuration is an instance configuration template that an Auto Scaling group uses to launch EC2 instances. 
+	 When you create a launch configuration, you specify information for the instances.Include the ID of the Amazon Machine
+	 Image (AMI), the instance type, a key pair, one or more security groups, and a block device mapping
+-----------------------------------------------------------------------------------------------------
+3. What are the components present in Autoscaling ?
+    there are 2 types 
+	1. Autoscaling group 2) Launch Configuration
+------------------------------------------------------------------------------------------
+4. What are the cloudwatch metrics that are available for EC2 instances?
+      Diskreads, Diskwrites, CPU utilization, networkpacketsIn, networkpacketsOut,
+          networkIn, networkOut, CPUCreditUsage, CPUCreditBalance.
+----------------------------------------------------------------------------------------------		  
+5. What are the parameters for S3 pricing?
+Answer:  The pricing model for s3 is 
+ 1)storage used,2)number of requests you make,3)Storage Management,4)Data Transfer,5)Transfer Accelaration
+-------------------------------------------------------------------------------------------------------------- 
+6.What is the maximum individual archive that you can store in glacier ?
+ A) You can store a maximum individual archive of upto 40 TB.
+ -------------------------------------------------------------------------------
+7. What are the different types of storage gateway?
+ A)  Following are the types of storage gateway.
+    File gateway,Volume gateway,Tape gateway 
+--------------------------------------------------------------------------------------	
+8 . What is a redshift? 
+ A) Amazon redshift is a data warehouse product. It is a fast and powerful, fully managed,
+      petabyte scale data warehouse service in the cloud
+----------------------------------------------------------------------------------------------------------------
+9.  What is the maximum size of messages in SQS ?
+	A) : The maximum size of messages in SQS is 256 KB  
+-----------------------------------------------------------------------------------------------	  
+10. What is multi-AZ RDS ?
+A)  Multi-AZ (Availability Zone) RDS allows you to have a replica of your production database in another availability zone. 
+   Multi-AZ (Availability Zone) database is used for disaster recovery. You will have an exact copy of your database. 
+   So when your primary database goes down, your application will automatically failover to the standby database.
+--------------------------------------------------------------------------------------------------------------   
+11. What are the types of backups in RDS database?	  
+A)  There are 2 types of backups in RDS database.
+     Automated backups  and Manual backups which are known as snapshots.	  
+----------------------------------------------------------------------------------------------	  
+12. What is and ELB?
+    ELB stands for Elastic Load balancing. ELB automatically distributes the incoming application traffic or network
+	traffic across multiple targets like EC2, containers, IP addresses.	  
+-------------------------------------------------------------------------------------------------------------	  
+13.  What are the two types of access that you can provide when you are creating users?	  
+A)  Following are the two types of access that you can create.	  
+	  Programmatic access and Console access
+-----------------------------------------------------------------------------------------------
+14.  What are the benefits of auto scaling?	  
+	Following are the benefits of auto scaling
+ 1)Better fault tolerance 2) Better availability 3)Better cost management  
+	  
+----------------------------------------------------------------------------------	  
+15. How can you convert a public subnet  to private subnet ?
+    Remove IGW and NAT Gateway  Associate subnet in private routetable
+--------------------------------------------------------------------------------	
+	  
+	  
+	  
+	  
+	  
