@@ -1,0 +1,192 @@
+AWS LAMBDA
+INTRODUCTION
+It is a server less computing technique provided by AWS. The name server less
+doesn’t mean no server, but it means server is present but it is not maintained/
+managed by the users. It is also referred as Function-as-a-Service.
+In IaaS, the Service Provider will maintain the Physical server and hypervisor. Above
+the hypervisor VM’s are created and in that user has to install suitable runtime
+environment for running their applications like if application is Java, then Java
+runtime environment must be installed and application code should also be present in
+the VM. Here user has to manage the OS, runtime, application and the code.
+In CaaS (Container-as-a-Service), the Service Provider will maintain the Physical
+server, OS and hypervisor. The user has to install suitable runtime environment for
+running their applications like if application is python, then python needs to be
+installed and application code should also be present. Here user has to manage the
+runtime, application and the code.
+In Server-less Computing, the Service Provider will maintain the Physical server,
+Containers, OS, runtime and hypervisor. User need to install application and store
+code in it. Here user has to manage only the application and the code.
+With server-less computing, the developers need not to worry about the
+compatibility issue of their application with respect to OS or not bother about
+which runtime to use and all. They just need to concentrate only on their
+application and code.
+In Azure and GCP we have "functions" which works similar to Lambda.
+Note:
+Whenever any request comes from any user for executing the function (lambda), then
+a container gets created and this function gets executed in this container and response
+will be sent back to the user who has requested for it's execution and finally the
+container gets killed.
+So, for how long the function is running inside the container, only for that
+amount of time charges will be applied. For this reason LAMBDA is called “Payas-
+you-use” service.
+Advantages of LAMBDA
+1. No Maintenance
+2. Pay-as-you-use
+3. High Availability
+4. Scalability - If 100 users send request for function execution at the same time,
+then LAMBDA will creates 100 containers and function gets executed in them.
+5. Monitoring
+6. Logging - If functions does not executed in any one container, then the reasons
+for not executing is stored in cloud watch by default. User get these log details
+from it.
+Maximum Execution Time of the LAMBDA function running in a container is
+15min. If function takes more than 15 min, then container is killed automatically.
+Deploying Applications in LAMBDA
+AWS Lambda is used in Event-based triggers.
+Scenario 1: Suppose we have built an application called photo processing app.
+Assume this application accepts only JPEG files. First we attach a LAMBDA trigger
+for our S3 bucket. Whenever a photo is uploaded to our S3 bucket, the event gets
+triggered and lambda function check format of the image file. If it is JPEG, then only
+the LAMBDA function gets executed and it processes the photo. Otherwise it won't
+execute.
+A metadata is passed as an input for the LAMBDA function. This metadata contains
+information about the bucket name and object name.
+Scenario 2: Assume our working hours is say 10AM to 5PM and we make our
+application to run in our EC2 instance and it is also available only in that time period.
+Here we try to restrict EC2 instance running period. So to do this we write a
+LAMBDA function which will start our EC2 instance at 10AM and stop our EC2
+instance at 5PM. The code is integrated with cloud watch which takes care to the
+time.
+Note:
+When we write LAMBDA function then we have to mention in that function that
+in which environment(runtime) the code has to run. Suppose our function is
+written in Java, then java runtime is required. Suppose our function is written in
+Python, then python runtime is required. Users not required to install any runtime
+here, the service providers will provide the runtime based on which runtime user is
+mentioned inside the LAMBDA function.
+Default Runtimes supported by AWS: Java, Python, Ruby, .Net, NodeJS, GO etc.
+Creating LAMBDA Function
+1. Click Create Function
+2. Creating Function in Python (suitable runtime we need to select). Since the logs
+are pushed on to the cloud watch by LAMBDA. So to access these logs we need a
+IAM role. So we also create role here.
+Finally click create function to create your LAMBDA function.
+A default code is created for us. We can see it in the below snapshot.
+Every LAMBDA function is an Event based function. So, under TEST tab we write
+the events.
+Once the LAMBDA function is edited and saved, Deploy Button gets activated. So
+click on that to add/update the code to the LAMBDA function.
+To execute the LAMBDA function we need to click Test Button. It will ask us to
+provide the event name, then again press test and we can see the function gets
+executed.
+Note: Only for Python and NodeJS, the code editor is visible/available.
+We can see the logs of our LAMBDA function in AWS Cloud Watch service. How
+many times the function has executed, that many logs are created in cloud watch.
+Click on View Logs in CloudWatch
+Create LAMBDA function for accessing the bucket lists
+import json
+import boto3
+s3=boto3.resource('s3')
+def lambda_handler(event, context):
+# TODO implement
+bktlist=[]
+for bucket in s3.buckets.all():
+bktlist.append(bucket.name)
+print(json.dumps(bktlist))
+print(event)
+return {
+'statusCode': 200,
+'body': json.dumps('Hello Kumar from AWS Lambda!')
+}
+Note
+1. If we deploy this code and test we will get error, because the IAM role for this
+LAMBDA function does not have S3 access permission.
+2. So go to the function, in that go to configuration in that select permissions tab.
+Here click on the your role name, it will redirect to the IAM service and here we have
+attach the S3 full access policy to this role.
+Now if we Deploy and test our code, it will show the bucket lists.
+Instead of writing the code in AWS LAMBDA, we write the functions separately in a
+file/folder and we compress it using zip. Now this zip file we can upload to AWS
+LAMBDA function.
+When we upload a zip file containing the function then it will overwrites the existing
+code.
+But when we deploy and test the code, it gives an error saying lambda_function
+module not found. Because by default the file name where our code is present is
+lambda_function. But when we have created our own zip file then it’s name is
+different.
+So we have to go to Runtime settings in our LAMBDA function and edit it.
+Following is the sample code in our LAMBDA function.
+import json
+def lambda_handler(event, context):
+# TODO implement
+m=5
+n=4
+res=m+n
+print(res)
+print(event)
+return {
+'statusCode': 200,
+'body': json.dumps('Hello Kumar from AWS Lambda! ')
+}
+LAMBDA function to start and stop EC2 instance
+Step 1: Create a IAM policy for start and stop of EC2
+{
+"Version": "2012-10-17",
+"Statement": [
+{
+"Effect": "Allow",
+"Action": [
+"logs:CreateLogGroup",
+"logs:CreateLogStream",
+"logs:PutLogEvents"
+],
+"Resource": "arn:aws:logs:*:*:*"
+},
+{
+"Effect": "Allow",
+"Action": [
+"ec2:Start*",
+"ec2:Stop*"
+],
+"Resource": "*"
+}
+]
+}
+Step 2: Create a lambda function and create a role for it which uses the above policy.
+For the LAMBDA function a role is created here and to that role policy is attached
+which is used to start and stop EC2 instance.
+LAMBDA function code to start the EC2 instances
+import json
+import boto3
+region = 'ap-southeast-1'
+instances = ['i-089d58206feb4e0b4','i-07291290f8fdcd7fd']
+ec2 = boto3.client('ec2', region_name=region)
+def lambda_handler(event, context):
+# TODO implement
+ec2.start_instances(InstanceIds=instances)
+print('started your instances: ' + str(instances))
+return {
+'statusCode': 200,
+'body': json.dumps('Hello from Lambda!')
+}
+Before Running the LAMBDA function the snapshot of EC2 instances
+Instances are in stopped status
+After Running the LAMBDA function the snapshot of EC2 instances
+Instances are in running status
+https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambdaeventbridge/
+LAMBDA function code to stop the EC2 instances
+import json
+import boto3
+region = 'ap-southeast-1'
+instances = ['i-089d58206feb4e0b4','i-07291290f8fdcd7fd']
+ec2 = boto3.client('ec2', region_name=region)
+def lambda_handler(event, context):
+# TODO implement
+ec2.stop_instances(InstanceIds=instances)
+print('stopped your instances: ' + str(instances))
+return {
+'statusCode': 200,
+'body': json.dumps('Hello from Lambda!')
+}
+Before Running the LAMBDA function the snapshot of EC2 instances
+After Running the LAMBDA function the snapshot of EC2 instances
