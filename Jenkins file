@@ -1,0 +1,16 @@
+pipeline{
+agent any {
+  stage {
+  stage ("build"){
+  step {
+  echo "first"
+  }
+  }
+  stage ("tes"){
+  step{
+  echo"second"
+  }
+  }
+  }
+}
+}
